@@ -1,3 +1,5 @@
+# -----Ricky Blomquist Tic Tac Toe game
+
 board = [1, 2, 3,
          4, 5, 6,
          7, 8, 9]
@@ -13,11 +15,14 @@ def main():
     
     while not game_over:
 
+        # Player one takes turn and calls functions to check board
         choice_one = int(input("Player 1, select number 1 - 9: "))
         board_choice(board, choice_one, player_one)
         print_board(board)
         game_over = check_board(board)
 
+        # If player 1 has won the game then the loop ends
+        # If not, player 2 takes their turn and checks the board again
         if not game_over:
             choice_two = int(input("Player 2, select number 1 - 9: "))
             board_choice(board, choice_two, player_two)
@@ -27,6 +32,7 @@ def main():
 
 
 def print_board(board):
+    """ function that prints the game board"""
 
     print()
     print(f"{board[0]} | {board[1]} | {board[2]}")
@@ -37,13 +43,18 @@ def print_board(board):
     print()
 
 def board_choice(board, choice, player):
+    """Function that places the X or O based on user inputted number."""
+
     valid = False
     while not valid:
+        # if statement to see if number is between 1 and 9
         if choice >= 1 and choice <= 9:
+                # checks to see if that number already has a piece on it
                 if board[choice -1] == "X" or board[choice -1] == "O":
                     print()
                     print("Square already taken")
                     choice = int(input("Select a different number 1 - 9: "))                   
+                # otherwise puts X or O based on who's turn it is
                 else:
                     board[choice - 1] = player
                     valid = True                
@@ -54,6 +65,7 @@ def board_choice(board, choice, player):
 
 
 def check_board(board):
+    """function to check the board to see if someone has won"""
     
     # --------------check vertical X -------------------
     if board[0] == "X" and board[3] == "X" and board[6] == "X":
